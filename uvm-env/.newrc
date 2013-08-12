@@ -1,0 +1,81 @@
+#!new # vim:syntax=sh:tw=72
+
+# DEFAULTS
+# --require DIRECTORY_PATTERN           # install location
+# --require PLACEHOLDER=VALUE_PATTERN   # parameter requirement
+# --require -e=FILENAME_PATTERN         # file must exist
+# --require -r=FILENAME_PATTERN         # file must be readable
+# --hard                                # links treated as hard
+--require NAME=^[a-zA-Z]\w*$
+
+# BRIEF
+#! Creates a new UVM environment component class
+
+=pod
+
+=head1 NAME
+
+B<uvm-env template> - Creates a new UVM environment component class
+
+=head1 SYNOPSIS
+
+B<new> uvm-env I<OPTIONS> {:I<NAME>:} [{:I<PARAMETERS>:}]
+
+=head1 DESCRIPTION
+
+Creates a basic UVM environment component class with two agents and optionally a register model.
+There is quite a lot left for the user to do, but this will get you started.
+
+=head1 PARAMETERS
+
+=over
+
+=item {:B<ADAPTOR1>:}={:I<UVM_ADAPTOR_CLASS>:}
+
+The class name of a UVM adaptor class to use.
+
+=item {:B<AGENT1>:}={:I<UVM_AGENT_CLASS>:}
+
+The class name of first UVM agent component to use.
+
+=item {:B<AGENT2>:}={:I<UVM_AGENT_CLASS>:}
+
+The class name of second UVM agent component to use.
+
+=item {:B<BASE1>:}={:I<UVM_REGISTER_CLASS>:}
+
+The register base address.
+
+=item {:B<REG1>:}={:I<UVM_REGISTER_CLASS>:}
+
+The class name of a UVM register to use.
+
+=back
+
+=head1 REQUIREMENTS
+
+UVM 1.1d or later.
+
+=head1 AUTHOR
+
+David C Black <david.black@doulos.com>
+
+=head1 COPYRIGHT & LICENSE
+
+'uvm-env' template is copyright (C) 2013 by Doulos
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+<http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+=cut
+
+# END  $Id: .newrc,v 1.0 2013/08/05 09:03:53 dcblack Exp $
