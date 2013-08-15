@@ -7,9 +7,19 @@
 # --require -r=FILENAME_PATTERN         # file must be readable
 # --hard                                # links treated as hard
 --require NAME=^[a-zA-Z]\w*$
---require TRANSACTION=^[a-zA-Z]\w*$
---alias TX=TRANSACTION
+--default AGENT={:NAME:}_agent
+--default CONFIG={:NAME:}_config
+--default TRANSACTION={:NAME:}_transaction
+--default SEQUENCER={:NAME:}_sequencer
+--default DRIVER={:NAME:}_driver
+--default MONITOR={:NAME:}_monitor
+--default COVERAGE={:NAME:}_coverage
+--alias CFG=CONFIG
+--alias TXN=TRANSACTION
 --alias SQR=SEQUENCER
+--alias DRV=DRIVER
+--alias MON=MONITOR
+--alias CVG=COVERAGE
 
 # BRIEF
 #! Creates a new UVM agent component
@@ -32,26 +42,68 @@ B<new> uvm-agent I<OPTIONS> {:I<NAME>:} [{:I<PARAMETERS>:}]
 
 =over
 
+=item {:B<ADD_COVERAGE>:}=1
+
+If set, enables insertion of a coverage class (see COVERAGE below).
+
+=item {:B<AGENT>:}={:I<UVM_AGENT_CLASSNAME>:}
+
+The class name of the UVM agent to use within the file.
+Defaults to {:NAME:}_agent.
+
+=item {:B<CONFIG>:}={:I<UVM_CONFIG_CLASSNAME>:}
+
+The class name of the UVM configuration object to use, if enabled
+(see ADD_COVERAGE).
+Defaults to {:NAME:}_config.
+Aka B<CFG>.
+
+=item {:B<COVERAGE>:}={:I<UVM_COVERAGE_CLASSNAME>:}
+
+The class name of the UVM cover collection class component to use.
+Defaults to {:NAME:}_coverage.
+Aka B<CVG>.
+
 =item {:B<DRIVER>:}={:I<UVM_DRIVER_CLASSNAME>:}
 
 The class name of the UVM driver to use. This is the BFM that talks to
 the interface.
+Defaults to {:NAME:}_driver.
+Aka B<DRV>.
+
+=item {:B<MONITOR>:}={:I<UVM_MONITOR_CLASSNAME>:}
+
+The class name of the UVM monitor to use. This is a passive BFM that talks to
+the interface.
+Defaults to {:NAME:}_monitor.
+Aka B<MON>.
+
+=item {:B<NOTYPEDEF>:}=1
+
+If set, disables creation of typedef for sequencer.
 
 =item {:B<SEQUENCER>:}={:I<UVM_SEQUENCER_CLASSNAME>:}
 
 The class name of the UVM sequencer to use. This is arbitrates sequences that
-communicate with the driver. If not specified, a B<typedef> will be created with
-the name {:TRANSACTION:}_sequencer. Aka B<SQR>.
+communicate with the driver. 
+Defaults to {:NAME:}_sequencer.
+Aka B<SQR>.
 
 =item {:B<TRANSACTION>:}={:I<UVM_TRANSACTION_CLASSNAME>:}
 
-The class name of the UVM sequence item to use. Aka B<TX>
+The class name of the UVM sequence item to use.
+Defaults to {:NAME:}_transaction.
+Aka B<TXN>.
 
 =back
 
 =head1 REQUIREMENTS
 
 UVM 1.1a or later.
+
+Monitor is assumed to have an B<analysis_port> by that very name.
+
+Coverage, if specified, is assumed to have an B<analysis_export> by that very name.
 
 =head1 AUTHOR
 
